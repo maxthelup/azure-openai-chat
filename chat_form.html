@@ -1,0 +1,25 @@
+<!-- filename: chat_form.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Mjoelnir</title>
+</head>
+<body>
+    <h1>Chat with Mjoelnir</h1>
+    <form action="/chat" method="post">
+        <label for="user_message">Your Message:</label><br>
+        <input type="text" id="user_message" name="user_message"><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- Display the response -->
+    {% if response %}
+        <h2>Response:</h2>
+        <p>{{ response }}</p>
+    {% endif %}
+</body>
+</html>
