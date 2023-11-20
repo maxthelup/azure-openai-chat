@@ -22,7 +22,8 @@
                 <strong>You:</strong> {{ user_message }}
             </div>
             <div class="ai-response">
-                <strong>Mjoelnir:</strong> {{ response }}
+                <strong>Mjoelnir:</strong>
+                <p>{{ response | safe }}</p> <!-- Render the response with line breaks -->
             </div>
         </div>
     {% endif %}

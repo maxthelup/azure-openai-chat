@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, render_template_string
+from flask import Flask, request, render_template
 import os
 from openai import AzureOpenAI
 
@@ -16,12 +16,10 @@ client = AzureOpenAI(
     api_version=api_version
 )
 
-
 @app.route('/', methods=['GET'])
 def index():
-    # Render the chat form using render_template
+    # Render the chat form
     return render_template('chat_form.html')
-
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -31,11 +29,10 @@ def chat():
         {"role": "user", "content": user_message},
     ]
 
-    response_data = get_chat_response_from_model(conversation)
+    response_text = get_chat_response_from_model(conversation)
+    formatted_response = response_text.replace("\n", "<br>")
 
-    # Render the form again along with the response
-    return render_template('chat_form.html', user_message=user_message, response=response_data)
-
+    return render_template('chat_form.html', user_message=user_message, response=formatted_response)
 
 def get_chat_response_from_model(chat_messages, model_name="Turbo35"):
     try:
@@ -43,10 +40,9 @@ def get_chat_response_from_model(chat_messages, model_name="Turbo35"):
             model=model_name,
             messages=chat_messages
         )
-        return response.choices[0].message.content
+        return response.choices[0].message.content if response.choices else "No response."
     except Exception as e:
         return f"An error occurred: {e}"
-
 
 if __name__ == '__main__':
     app.run(debug=True)
