@@ -1,13 +1,11 @@
-# filename: app.py
-
-from flask import Flask, request, render_template_string
+from flask import Flask, request, render_template, render_template_string
 import os
 from openai import AzureOpenAI
 
 app = Flask(__name__)
 
 # Set up Azure OpenAI credentials
-azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+azure_endpoint = os.getenv("AZURE_OPENAI_CHAT_ENDPOINT")
 api_key = os.getenv("AZURE_OPENAI_KEY")
 api_version = "2023-05-15"
 
@@ -21,22 +19,22 @@ client = AzureOpenAI(
 
 @app.route('/', methods=['GET'])
 def index():
-    # Render the chat form
-    return render_template_string(open('chat_form.html').read())
+    # Render the chat form using render_template
+    return render_template('chat_form.html')
 
 
 @app.route('/chat', methods=['POST'])
 def chat():
     user_message = request.form['user_message']
     conversation = [
-        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "system", "content": "You are an AI assistant that helps people find information."},
         {"role": "user", "content": user_message},
     ]
 
-    response = get_chat_response_from_model(conversation)
+    response_data = get_chat_response_from_model(conversation)
 
     # Render the form again along with the response
-    return render_template_string(open('chat_form.html').read(), response=response)
+    return render_template('chat_form.html', user_message=user_message, response=response_data)
 
 
 def get_chat_response_from_model(chat_messages, model_name="Turbo35"):
