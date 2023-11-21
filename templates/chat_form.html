@@ -9,11 +9,19 @@
 </head>
 <body>
     <h1>Chat with Mjoelnir</h1>
+
+    <!-- Chat message form -->
+        <!-- Button to clear the conversation -->
     <form action="/chat" method="post">
         <label for="user_message">Your Message:</label><br>
         <input type="text" id="user_message" name="user_message"><br>
         <input type="submit" value="Submit">
     </form>
+    <br>
+    <form action="/clear" method="get">
+        <input type="submit" value="Clear Conversation">
+    </form>
+
 
     <!-- Display the response -->
     {% if response %}
@@ -23,7 +31,7 @@
             </div>
             <div class="ai-response">
                 <strong>Mjoelnir:</strong>
-                <p>{{ response | safe }}</p> <!-- Render the response with line breaks -->
+                <p>{{ response | safe }}</p>
             </div>
         </div>
     {% endif %}
