@@ -1,63 +1,34 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 20px;
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-h1 {
-    color: #333;
-}
-
 .chat-box {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-top: 20px;
+    background-color: #f8f9fa;
     border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 15px;
+    margin-top: 20px;
 }
 
 .user-message, .ai-response {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
 }
 
 .user-message {
-    background-color: #e7e7e7;
+    background-color: #e9ecef;
 }
 
 .ai-response {
-    background-color: #f0f0f0;
+    background-color: #dee2e6;
+}
+.header {
+    text-align: center;
+    position: relative; /* Ensure relative positioning for absolute child elements */
 }
 
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    resize: vertical;
+.logo {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px; /* Adds space below the logo */
 }
 
-input[type=submit] {
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type=submit]:hover {
-    background-color: #555;
-}
-
-@media (max-width: 768px) {
-    textarea {
-        width: 100%;
-    }
+.logo-spacer {
+    height: 40px; /* Adjust this value as needed for spacing */
 }

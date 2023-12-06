@@ -4,27 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <title>Chat with DurstGPT</title>
+    <title>Durst AI-Assistant</title>
 </head>
 <body>
-    <h1>Chat with DurstGPT</h1>
-    <form action="/chat" method="post">
-        <label for="user_question">Enter Your Question:</label><br>
-        <textarea id="user_question" name="user_question" rows="4" cols="50"></textarea><br>
-        <input type="submit" value="Submit">
-    </form>
-
-    <!-- Display the response -->
-    {% if response %}
-        <div class="chat-box">
-            <div class="user-message">
-                <strong>You:</strong> {{ user_question }}
-            </div>
-            <div class="ai-response">
-                <strong>DurstGPT:</strong> {{ response | safe }}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12 text-right">
+                <img src="static/images/Durst_Logo_WEB_small.jpg" alt="Durst Logo" class="logo" style="margin-bottom: 20px;">
             </div>
         </div>
-    {% endif %}
+        <h1 class="text-center mb-2">Durst AI-Assistant</h1>
+        <p class="intro-text text-center">
+            Hi there, I'm your Durst AI-Assistant, powered by Azure OpenAI.<br>
+            Whether you've got big questions or need quick answers, I'm here to help.<br>
+            Just type in your query and let's get started!<br>
+        </p>
+
+        <h3 class="text-center mb-3">Ask Your Question:</h3>
+        <form action="/chat" method="post" class="mb-3">
+            <div class="form-group">
+                <textarea class="form-control" id="user_question" name="user_question" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </form>
+
+        {% if response %}
+            <div class="chat-box">
+                <div class="user-message mb-2">
+                    <strong>You:</strong> {{ user_question }}
+                </div>
+                <div class="ai-response">
+                    <strong>DurstGPT:</strong> {{ response | safe }}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
