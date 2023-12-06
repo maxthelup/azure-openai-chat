@@ -30,7 +30,7 @@ def index():
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    user_message = request.form['user_message']
+    user_message = request.form['user_question']
 
     if 'conversation' not in session:
         session['conversation'] = [

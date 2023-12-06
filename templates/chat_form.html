@@ -4,34 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/styles.css">
-    <title>Chat with Mjoelnir</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Chat with DurstGPT</title>
 </head>
 <body>
-    <h1>Chat with Mjoelnir</h1>
-
-    <!-- Chat message form -->
-        <!-- Button to clear the conversation -->
+    <h1>Chat with DurstGPT</h1>
     <form action="/chat" method="post">
-        <label for="user_message">Your Message:</label><br>
-        <input type="text" id="user_message" name="user_message"><br>
+        <label for="user_question">Enter Your Question:</label><br>
+        <textarea id="user_question" name="user_question" rows="4" cols="50"></textarea><br>
         <input type="submit" value="Submit">
     </form>
-    <br>
-    <form action="/clear" method="get">
-        <input type="submit" value="Clear Conversation">
-    </form>
-
 
     <!-- Display the response -->
     {% if response %}
         <div class="chat-box">
             <div class="user-message">
-                <strong>You:</strong> {{ user_message }}
+                <strong>You:</strong> {{ user_question }}
             </div>
             <div class="ai-response">
-                <strong>Mjoelnir:</strong>
-                <p>{{ response | safe }}</p>
+                <strong>DurstGPT:</strong> {{ response | safe }}
             </div>
         </div>
     {% endif %}
