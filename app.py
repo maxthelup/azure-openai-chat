@@ -1,7 +1,9 @@
 from flask import Flask, request, render_template, session, redirect, url_for
 from flask_session import Session
 import os
+import openai
 from openai import AzureOpenAI
+
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_KEY")
