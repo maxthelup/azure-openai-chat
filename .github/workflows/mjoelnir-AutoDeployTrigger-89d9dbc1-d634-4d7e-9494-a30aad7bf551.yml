@@ -1,0 +1,45 @@
+name: Trigger auto deployment for mjoelnir
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ master ]
+    paths:
+    - '**'
+    - '.github/workflows/mjoelnir-AutoDeployTrigger-89d9dbc1-d634-4d7e-9494-a30aad7bf551.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:      
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write #This is required for requesting the OIDC JWT Token
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.MJOELNIR_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.MJOELNIR_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.MJOELNIR_AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: myaicontainers.azurecr.io
+          registryUsername: ${{ secrets.MJOELNIR_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.MJOELNIR_REGISTRY_PASSWORD }}
+          containerAppName: mjoelnir
+          resourceGroup: AI-Playground
+          imageToBuild: myaicontainers.azurecr.io/mjoelnir:${{ github.sha }}
+          
+
+
